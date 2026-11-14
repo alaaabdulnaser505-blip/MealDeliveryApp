@@ -7,8 +7,8 @@ class AppTheme {
   static ThemeData get lightTheme {
     return ThemeData(
       useMaterial3: true,
-      fontFamily: AppTextStyles.fontFamily,
-      scaffoldBackgroundColor: AppColors.background,
+
+      scaffoldBackgroundColor: AppColors.white,
 
       colorScheme: ColorScheme.fromSeed(
         seedColor: AppColors.primary,
@@ -20,26 +20,26 @@ class AppTheme {
         error: AppColors.error,
       ),
 
-      textTheme: const TextTheme(
-        headlineLarge: AppTextStyles.headline,
+      textTheme: TextTheme(
+        headlineLarge: AppTextStyles.heading1,
+        headlineMedium: AppTextStyles.heading2,
+        headlineSmall: AppTextStyles.heading3,
+
         titleLarge: AppTextStyles.title,
-        titleMedium: AppTextStyles.subtitle,
-        bodyMedium: AppTextStyles.body,
-        labelMedium: AppTextStyles.label,
+
+        bodyLarge: AppTextStyles.text1,
+        bodyMedium: AppTextStyles.text2,
+        bodySmall: AppTextStyles.text4,
+
+        labelMedium: AppTextStyles.text3,
       ),
 
-      appBarTheme: const AppBarTheme(
-        backgroundColor: AppColors.background,
-        foregroundColor: AppColors.neutral,
-        elevation: 0,
-        centerTitle: false,
-      ),
+     
 
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
           backgroundColor: AppColors.primary,
           foregroundColor: AppColors.white,
-          minimumSize: const Size(double.infinity, 52),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(14),
           ),
@@ -56,13 +56,13 @@ class AppTheme {
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(14),
           borderSide: const BorderSide(
-            color: AppColors.lightGrey,
+            color: AppColors.warmWhite,
           ),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(14),
           borderSide: const BorderSide(
-            color: AppColors.lightGrey,
+            color: AppColors.blackGrey,
           ),
         ),
         focusedBorder: OutlineInputBorder(
