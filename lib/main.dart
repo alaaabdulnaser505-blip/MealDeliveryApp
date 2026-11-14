@@ -14,9 +14,9 @@ class TriporaApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
-      title: 'Tripora',
+      
       theme: AppTheme.lightTheme,
-  
+      
       routerConfig: AppRouter.router,
     );
   }
