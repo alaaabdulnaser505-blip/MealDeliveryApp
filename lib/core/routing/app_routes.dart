@@ -4,17 +4,17 @@ import 'package:go_router/go_router.dart';
 
 class AppRouter {
   static const String home = '/home';
-  static const String explore = '/explore';
-  static const String trips = '/trips';
-  static const String itinerary = '/itinerary';
-  static const String budget = '/budget';
-  static const String packing = '/packing';
+  static const String splash = '/splash';
+  static const String onBoarding = '/onboarding';
+  static const String signIn = '/signIn';
+  static const String signUp = '/signup';
+  static const String forgetPass = '/forgetpass';
 
   static final GoRouter router = GoRouter(
-    initialLocation: home,
+    initialLocation: splash,
     routes: [
       GoRoute(
-        path: home,
+        path: splash,
         builder: (context, state) {
           return const Scaffold(
             body: Center(
