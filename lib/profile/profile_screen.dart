@@ -1,25 +1,47 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:image_picker/image_picker.dart';
-
 import 'package:tripora/core/theme/app_colors.dart';
 import 'package:tripora/core/theme/app_text_styles.dart';
+import 'package:tripora/profile/address_book.dart';
 import 'package:tripora/profile/cubit/profile_cubit.dart';
 import 'package:tripora/profile/cubit/profile_state.dart';
 import 'package:tripora/profile/my_profile_screen.dart';
 import 'package:tripora/profile/widgets/custom_profile_item.dart';
 
-class ProfileScreen extends StatefulWidget {
+class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
 
   @override
-  State<ProfileScreen> createState() => _ProfileScreenState();
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (_) => ProfileCubit(),
+      child: const ProfileView(),
+    );
+  }
 }
 
-class _ProfileScreenState extends State<ProfileScreen> {
+// 2) الشاشة الأصلية بعد تغيير الاسم
+class ProfileView extends StatefulWidget {
+  const ProfileView({super.key});
+
+  @override
+  State<ProfileView> createState() => _ProfileViewState();
+}
+
+class _ProfileViewState extends State<ProfileView> {
+  void openMyProfile() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) => BlocProvider.value(
+          value: context.read<ProfileCubit>(),
+          child: const MyProfileScreen(),
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,14 +55,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   child: Column(
                     children: [
                       GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (_) => const MyProfileScreen(),
-                            ),
-                          );
-                        },
+                        onTap: openMyProfile,
+
                         child: BlocBuilder<ProfileCubit, ProfileState>(
                           builder: (context, state) {
                             final image = context
@@ -73,18 +89,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 CustomProfileItem(
                   image: 'assets/images/profile_icon.png',
                   title: 'My Profile',
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const MyProfileScreen(),
-                      ),
-                    );
-                  },
+                  onTap: openMyProfile,
                 ),
                 CustomProfileItem(
                   image: 'assets/images/location_icon.png',
                   title: 'Address Book',
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => AddressBook()),
+                    );
+                  },
                 ),
                 CustomProfileItem(
                   image: 'assets/images/payment_icon.png',

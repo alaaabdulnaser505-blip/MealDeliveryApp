@@ -7,9 +7,7 @@ import 'package:tripora/profile/profile_screen.dart';
 import 'core/theme/app_theme.dart';
 
 void main() {
-  runApp(
-    BlocProvider(create: (_) => ProfileCubit(), child: const TriporaApp()),
-  );
+  runApp(const TriporaApp());
 }
 
 class TriporaApp extends StatelessWidget {
@@ -21,7 +19,6 @@ class TriporaApp extends StatelessWidget {
       home: ProfileScreen(),
 
       debugShowCheckedModeBanner: false,
-
       theme: AppTheme.lightTheme,
 
       routes: {
