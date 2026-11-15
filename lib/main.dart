@@ -1,6 +1,7 @@
-
 import 'package:flutter/material.dart';
-import 'package:tripora/core/routing/app_routes.dart';
+import 'package:tripora/profile/my_profile_screen.dart';
+
+import 'package:tripora/profile/profile_screen.dart';
 import 'core/theme/app_theme.dart';
 
 void main() {
@@ -12,13 +13,17 @@ class TriporaApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
+    return MaterialApp(
+      home: ProfileScreen(),
+
       debugShowCheckedModeBanner: false,
-      
+
       theme: AppTheme.lightTheme,
-      
-      routerConfig: AppRouter.router,
+
+      routes: {
+        '/profile': (context) => const ProfileScreen(),
+        '/myprofile': (context) => const MyProfileScreen(),
+      },
     );
   }
 }
-
