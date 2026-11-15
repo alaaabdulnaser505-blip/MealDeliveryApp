@@ -1,15 +1,17 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:tripora/core/theme/app_colors.dart';
+import 'package:tripora/profile/cubit/profile_cubit.dart';
+import 'package:tripora/profile/cubit/profile_state.dart';
 import 'package:tripora/profile/widgets/custom_eleveted_button.dart';
 import 'package:tripora/profile/widgets/custom_text_form_field.dart';
 import 'package:tripora/profile/widgets/validator.dart';
 
 class MyProfileScreen extends StatefulWidget {
-  final File? profileImage;
-
-  const MyProfileScreen({super.key, this.profileImage});
+  const MyProfileScreen({super.key});
 
   @override
   State<MyProfileScreen> createState() => _MyProfileScreenState();
@@ -19,7 +21,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController mobileController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
-  File? profileImage;
+
   final formKey = GlobalKey<FormState>();
   final ImagePicker picker = ImagePicker();
 
@@ -27,13 +29,8 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
     final XFile? image = await picker.pickImage(source: ImageSource.gallery);
 
     if (image != null) {
-      final newImage = File(image.path);
-
-      setState(() {
-        profileImage = newImage;
-      });
-
-      Navigator.pop(context, newImage);
+      if (!mounted) return;
+      context.read<ProfileCubit>().setImage(File(image.path));
     }
   }
 
@@ -77,13 +74,20 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                     shape: BoxShape.circle,
                   ),
                   child: ClipOval(
-                    child: profileImage != null
-                        ? Image.file(profileImage!, fit: BoxFit.cover)
-                        : const Icon(
-                            Icons.person,
-                            size: 55,
-                            color: Color(0xffBD2529),
-                          ),
+                    child: BlocBuilder<ProfileCubit, ProfileState>(
+                      builder: (context, state) {
+                        final image = context.read<ProfileCubit>().profileImage;
+
+                        if (image != null) {
+                          return Image.file(image, fit: BoxFit.cover);
+                        }
+                        return const Icon(
+                          Icons.person,
+                          size: 55,
+                          color: AppColors.darkRed,
+                        );
+                      },
+                    ),
                   ),
                 ),
               ),

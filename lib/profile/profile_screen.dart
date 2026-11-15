@@ -1,11 +1,14 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:image_picker/image_picker.dart';
 
 import 'package:tripora/core/theme/app_colors.dart';
 import 'package:tripora/core/theme/app_text_styles.dart';
+import 'package:tripora/profile/cubit/profile_cubit.dart';
+import 'package:tripora/profile/cubit/profile_state.dart';
 import 'package:tripora/profile/my_profile_screen.dart';
 import 'package:tripora/profile/widgets/custom_profile_item.dart';
 
@@ -17,8 +20,6 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  File? profileImage;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,36 +33,38 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   child: Column(
                     children: [
                       GestureDetector(
-                        onTap: () async {
-                          final result = await Navigator.push<File?>(
+                        onTap: () {
+                          Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) =>
-                                  MyProfileScreen(profileImage: profileImage),
+                              builder: (_) => const MyProfileScreen(),
                             ),
                           );
-
-                          if (result != null) {
-                            setState(() {
-                              profileImage = result;
-                            });
-                          }
                         },
-                        child: CircleAvatar(
-                          radius: 50,
-                          backgroundColor: const Color(0xffF8D0D0),
-                          backgroundImage: profileImage != null
-                              ? FileImage(profileImage!)
-                              : null,
-                          child: profileImage == null
-                              ? const Icon(
-                                  Icons.person,
-                                  size: 55,
-                                  color: Color(0xffBD2529),
-                                )
-                              : null,
+                        child: BlocBuilder<ProfileCubit, ProfileState>(
+                          builder: (context, state) {
+                            final image = context
+                                .read<ProfileCubit>()
+                                .profileImage;
+
+                            return CircleAvatar(
+                              radius: 50,
+                              backgroundColor: const Color(0xffF8D0D0),
+                              backgroundImage: image != null
+                                  ? FileImage(image)
+                                  : null,
+                              child: image == null
+                                  ? const Icon(
+                                      Icons.person,
+                                      size: 55,
+                                      color: Color(0xffBD2529),
+                                    )
+                                  : null,
+                            );
+                          },
                         ),
                       ),
+
                       Text('Sandrica', style: AppTextStyles.heading1),
                       Text('0101011', style: AppTextStyles.title),
                     ],
