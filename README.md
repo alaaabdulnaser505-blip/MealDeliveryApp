@@ -1,159 +1,69 @@
-# ✈️ TripMate – Travel Planner App
+# Meal Delivery App 🍽️
 
-**Plan your trips. Organize your adventures. Track every expense.**
+**A Flutter-based meal delivery application that allows users to explore recipes, discover trending dishes, manage their cart, and place food orders through a simple and user-friendly interface.**
 
-TripMate is a Flutter-based travel planning application designed to help users organize their entire travel experience in one place.
+📱 Features
 
-From creating trips and managing daily itineraries to tracking expenses, preparing packing lists, and exploring destinations, TripMate aims to be a personal travel organizer that makes traveling easier and more organized.
+Authentication
 
-«🚧 Project Status: In Development»
+User sign up and sign in.
 
-📱 Main Features
+Forgot password functionality.
 
-1. Authentication
+Firebase Authentication integration.
 
-- User Registration and Login.
-- Forgot Password.
-- Logout.
-- Edit Profile.
-- Secure user-specific data.
+Home & Discovery
 
-2. My Trips
+Browse available recipes.
 
-- Create, view, edit, and delete trips.
-- Set destination, dates, budget, and currency.
-- Automatically calculate trip duration.
-- Search and filter trips.
-- Categorize trips into upcoming, current, and past.
+Explore trending recipes.
 
-3. Itinerary Planner
+Search for dishes.
 
-- Organize activities by day.
-- Add, edit, and delete activities.
-- Set activity dates and times.
-- Add locations, categories, and notes.
-- Detect scheduling conflicts.
+Dish Details
 
-4. Budget & Expense Tracker
+View detailed food information.
 
-- Set a budget for each trip.
-- Record and manage expenses.
-- Categorize expenses.
-- Calculate total spending and remaining budget.
-- Visualize expenses using charts.
+Explore individual dishes.
 
-5. Packing List
+Shopping Cart
 
-- Create custom packing lists.
-- Organize items by category.
-- Mark items as packed.
-- Track packing progress.
+Add items to the cart.
 
-6. Explore Destinations
+Manage cart items.
 
-- Search for destinations.
-- View destination information.
-- Check weather forecasts.
-- Explore popular places.
-- Save favorite destinations.
+Proceed to checkout.
 
-7. Dashboard
+Checkout & Orders
 
-- View upcoming and current trips.
-- Access upcoming activities.
-- Monitor travel expenses.
-- Get quick access to important features.
+Checkout screen.
 
-🛠️ Tech Stack
+Order confirmation screen.
 
-Technology| Usage
-Flutter & Dart| Mobile Application Development
-Cubit (Bloc)| State Management
-Firebase Authentication| User Authentication
-Cloud Firestore| Cloud Database
-Hive| Local Storage
-Dio| API Requests
-Open-Meteo API| Weather Forecasts
-FL Chart| Data Visualization
-Shared Preferences| Local Settings
-Go Router| Navigation
+User Profile
 
-🏗️ Architecture
+View and manage profile information.
 
-TripMate follows a Feature-Based Clean Architecture approach.
+Address book.
 
-Each feature is divided into three main layers:
+Profile settings and preferences.
 
-- Data Layer: Models, data sources, and repository implementations.
-- Domain Layer: Entities, repository contracts, and use cases.
-- Presentation Layer: Screens, widgets, and Cubit state management.
+Saved Recipes
 
-📂 Project Structure
+Access saved dishes.
 
+🛠️ Technologies Used
 
+Flutter & Dart – Cross-platform application development.
 
-🔗 APIs
+Firebase Authentication – User authentication.
 
-- Open-Meteo: Weather forecasts.
-- Geoapify: Places and location search.
-- REST Countries: Country information.
+Cloud Firestore – Cloud database.
 
-🎯 Project Goals
+Flutter BLoC / Cubit – State management.
 
-- Build a complete and user-friendly travel planning application.
-- Apply Clean Architecture principles.
-- Practice state management using Cubit.
-- Integrate Firebase services.
-- Work with external REST APIs.
-- Implement local data storage and caching.
-- Create responsive and reusable Flutter UI components.
+Google Fonts – Custom typography.
 
-🚀 Getting Started
+Image Picker – Image selection.
 
-Prerequisites
-
-- Flutter SDK
-- Dart SDK
-- Android Studio or VS Code
-- Firebase Project (for backend services)
-
-Installation
-
-1. Clone the repository:
-
-git clone https://github.com/alaaabdulnaser505-blip/TripMate.git
-
-2. Navigate to the project directory:
-
-cd TripMate
-
-3. Install dependencies:
-
-flutter pub get
-
-4. Run the application:
-
-flutter run
-
-«Note: Firebase configuration and API setup instructions will be added as the project develops.»
-
-📌 Development Roadmap
-
-- [ ] Project setup and architecture.
-- [ ] Authentication module.
-- [ ] Trips CRUD operations.
-- [ ] Itinerary planner.
-- [ ] Budget and expense tracker.
-- [ ] Packing list.
-- [ ] Weather API integration.
-- [ ] Local storage with Hive.
-- [ ] Dashboard UI.
-- [ ] Testing and documentation.
-
-👩‍💻 Developer
-
-Developed as a Flutter application project to practice mobile development, software architecture, API integration, and state management.
-
----
-
-⭐ If you find this project interesting, feel free to explore the repository as development progresses.
+Cached Network Image – Network image handling.
