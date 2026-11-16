@@ -40,6 +40,8 @@ dependencies:
   firebase_auth: ^7.0.1
   google_fonts: ^6.2.1
   cloud_firestore: ^7.1.0
+  image_picker: ^1.2.4
+  bloc: ^9.2.1
   cached_network_image: ^4.0.7
   hive: ^2.2.3
   hive_flutter: ^1.1.0
@@ -67,6 +69,9 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
+  assets:
+    - assets/images/
+   # - assets/icons/
   #assets:
     #- assets/images/
     #- assets/icons/
