@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 class CustomTextFormField extends StatefulWidget {
@@ -18,12 +17,10 @@ class CustomTextFormField extends StatefulWidget {
   });
 
   @override
-  State<CustomTextFormField> createState() =>
-      _CustomTextFormFieldState();
+  State<CustomTextFormField> createState() => _CustomTextFormFieldState();
 }
 
-class _CustomTextFormFieldState
-    extends State<CustomTextFormField> {
+class _CustomTextFormFieldState extends State<CustomTextFormField> {
   late bool isObscure;
 
   @override
@@ -85,17 +82,12 @@ class _CustomTextFormFieldState
 
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(15),
-          borderSide: const BorderSide(
-            color: Color(0xff4F969B),
-            width: 1.5,
-          ),
+          borderSide: const BorderSide(color: Color(0xff4F969B), width: 1.5),
         ),
 
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(15),
-          borderSide: const BorderSide(
-            color: Colors.red,
-          ),
+          borderSide: const BorderSide(color: Colors.red),
         ),
       ),
     );

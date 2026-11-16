@@ -17,3 +17,15 @@ class ProfileErrorState extends ProfileState {
 
   ProfileErrorState({required this.msg});
 }
+
+class ProfileLogoutSuccess extends ProfileState {}
+
+// Get User Data
+class ProfileDataLoadedState extends ProfileState {
+  final Map<String, dynamic> userData;
+
+  ProfileDataLoadedState({required this.userData});
+}
+
+// Update User Data
+class ProfileUpdateSuccessState extends ProfileState {}

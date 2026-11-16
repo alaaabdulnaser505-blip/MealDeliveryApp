@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -21,7 +20,6 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
-
   final formKeySign = GlobalKey<FormState>();
 
   final TextEditingController email = TextEditingController();
@@ -38,7 +36,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
     super.dispose();
   }
 
-
   @override
   Widget build(BuildContext context) {
     return BlocListener<SignUpCubit, SignUpState>(
@@ -47,70 +44,59 @@ class _SignUpScreenState extends State<SignUpScreen> {
         resizeToAvoidBottomInset: true,
         body: SafeArea(
           child: LayoutBuilder(
-            
-builder: (context, constraints) {
-  final width = constraints.maxWidth;
-  final height = constraints.maxHeight;
-  final isTablet = width >= 600;
+            builder: (context, constraints) {
+              final width = constraints.maxWidth;
+              final height = constraints.maxHeight;
+              final isTablet = width >= 600;
 
-  return SingleChildScrollView(
-    padding: const EdgeInsets.symmetric(
-      horizontal: 20,
-      vertical: 24,
-    ),
-    child: Center(
-      child: SizedBox(
-        width: isTablet ? 450 : width * 0.9,
-        child: Form(
-          key: formKeySign,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-               SizedBox(height: height * 0.1),
-          
-             AuthHeader(title: 'SignUP'),
+              return SingleChildScrollView(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                  vertical: 24,
+                ),
+                child: Center(
+                  child: SizedBox(
+                    width: isTablet ? 450 : width * 0.9,
+                    child: Form(
+                      key: formKeySign,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          SizedBox(height: height * 0.1),
 
-              SizedBox(height: height * 0.035),
+                          AuthHeader(title: 'SignUP'),
 
-           
-              _buildFormFields(height),
+                          SizedBox(height: height * 0.035),
 
-              SizedBox(height: height * 0.04),
+                          _buildFormFields(height),
 
-              
-              _buildSignUpButton(context),
+                          SizedBox(height: height * 0.04),
 
-              SizedBox(height: height * 0.04),
+                          _buildSignUpButton(context),
 
-            
-              _buildDivider(),
+                          SizedBox(height: height * 0.04),
 
-              SizedBox(height: height * 0.025),
+                          _buildDivider(),
 
-            
-              buildSocialSection(),
+                          SizedBox(height: height * 0.025),
 
-              SizedBox(height: height * 0.035),
+                          buildSocialSection(),
 
-          
-              _buildLoginSection(context),
-            ],
-          ),
-        ),
-      ),
-    ),
-  );
-},
+                          SizedBox(height: height * 0.035),
 
+                          _buildLoginSection(context),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              );
+            },
           ),
         ),
       ),
     );
   }
-
- 
-
-
 
   // 2. Form Fields Section
   Widget _buildFormFields(double height) {
@@ -154,10 +140,10 @@ builder: (context, constraints) {
       onpress: () {
         if (formKeySign.currentState!.validate()) {
           context.read<SignUpCubit>().signUP(
-                email.text.trim(),
-                password.text,
-                name.text.trim(),
-              );
+            email.text.trim(),
+            password.text,
+            name.text.trim(),
+          );
         }
       },
     );
@@ -167,24 +153,20 @@ builder: (context, constraints) {
   Widget _buildDivider() {
     return const Row(
       children: [
-        Expanded(child: Divider(color: AppColors.blackGrey,)),
+        Expanded(child: Divider(color: AppColors.blackGrey)),
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 10),
           child: Text(
             'Or continue with',
-            style: TextStyle(
-              fontSize: 12,
-              color: AppColors.blackGrey,
-            ),
+            style: TextStyle(fontSize: 12, color: AppColors.blackGrey),
           ),
         ),
-        Expanded(child: Divider(color: AppColors.blackGrey,)),
+        Expanded(child: Divider(color: AppColors.blackGrey)),
       ],
     );
   }
 
   // 5. Social Login Section
- 
 
   // 6. Login Navigation Section
   Widget _buildLoginSection(BuildContext context) {
@@ -220,27 +202,24 @@ builder: (context, constraints) {
         showDialog(
           context: context,
           barrierDismissible: false,
-          builder: (context) => const Center(
-            child: CircularProgressIndicator(),
-          ),
+          builder: (context) =>
+              const Center(child: CircularProgressIndicator()),
         );
       }
     } else if (state is SignUpSuccess) {
       _closeLoadingDialog();
 
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Sign Up Successful')),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(const SnackBar(content: Text('Sign Up Successful')));
 
       context.go(AppRouter.signIn);
     } else if (state is SignUpFailure) {
       _closeLoadingDialog();
 
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Sign Up Failed: ${state.error}'),
-        ),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text('Sign Up Failed: ${state.error}')));
     }
   }
 

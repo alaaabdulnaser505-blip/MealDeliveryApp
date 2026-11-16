@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:tripora/profile/widgets/custom_eleveted_button.dart';
-import 'package:tripora/profile/widgets/custom_text_form_field.dart';
+import 'package:tripora/features/profile/widgets/custom_eleveted_button.dart';
+import 'package:tripora/features/profile/widgets/custom_text_form_field.dart';
 
 class AddressBook extends StatelessWidget {
   AddressBook({super.key});
@@ -11,7 +11,7 @@ class AddressBook extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text('Address Book'),
+        title: Text('Address Book', style: TextStyle(color: Colors.black)),
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);

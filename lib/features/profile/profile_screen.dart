@@ -3,11 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:tripora/core/theme/app_colors.dart';
 import 'package:tripora/core/theme/app_text_styles.dart';
-import 'package:tripora/profile/address_book.dart';
-import 'package:tripora/profile/cubit/profile_cubit.dart';
-import 'package:tripora/profile/cubit/profile_state.dart';
-import 'package:tripora/profile/my_profile_screen.dart';
-import 'package:tripora/profile/widgets/custom_profile_item.dart';
+import 'package:tripora/features/profile/address_book.dart';
+import 'package:tripora/features/profile/cubit/profile_cubit.dart';
+import 'package:tripora/features/profile/cubit/profile_state.dart';
+import 'package:tripora/features/profile/my_profile_screen.dart';
+import 'package:tripora/features/profile/widgets/custom_profile_item.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -15,21 +15,27 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => ProfileCubit(),
+      create: (context) => ProfileCubit()..getUserData(),
       child: const ProfileView(),
     );
   }
 }
 
-// 2) الشاشة الأصلية بعد تغيير الاسم
 class ProfileView extends StatefulWidget {
   const ProfileView({super.key});
 
   @override
-  State<ProfileView> createState() => _ProfileViewState();
+  State<ProfileView> createState() => _ProfileScreenState();
 }
 
-class _ProfileViewState extends State<ProfileView> {
+class _ProfileScreenState extends State<ProfileView> {
+  @override
+  void initState() {
+    super.initState();
+
+    context.read<ProfileCubit>().getUserData();
+  }
+
   void openMyProfile() {
     Navigator.push(
       context,
@@ -51,19 +57,27 @@ class _ProfileViewState extends State<ProfileView> {
             padding: const EdgeInsets.all(15.0),
             child: Column(
               children: [
-                Center(
-                  child: Column(
-                    children: [
-                      GestureDetector(
-                        onTap: openMyProfile,
+                // Profile Header
+                BlocBuilder<ProfileCubit, ProfileState>(
+                  builder: (context, state) {
+                    final cubit = context.read<ProfileCubit>();
+                    final user = cubit.userData;
+                    final image = cubit.profileImage;
 
-                        child: BlocBuilder<ProfileCubit, ProfileState>(
-                          builder: (context, state) {
-                            final image = context
-                                .read<ProfileCubit>()
-                                .profileImage;
+                    if (state is ProfileLoadingState && user == null) {
+                      return const Center(child: CircularProgressIndicator());
+                    }
 
-                            return CircleAvatar(
+                    if (state is ProfileErrorState && user == null) {
+                      return Center(child: Text(state.msg));
+                    }
+
+                    return Center(
+                      child: Column(
+                        children: [
+                          GestureDetector(
+                            onTap: openMyProfile,
+                            child: CircleAvatar(
                               radius: 50,
                               backgroundColor: const Color(0xffF8D0D0),
                               backgroundImage: image != null
@@ -76,21 +90,32 @@ class _ProfileViewState extends State<ProfileView> {
                                       color: Color(0xffBD2529),
                                     )
                                   : null,
-                            );
-                          },
-                        ),
-                      ),
+                            ),
+                          ),
 
-                      Text('Sandrica', style: AppTextStyles.heading1),
-                      Text('0101011', style: AppTextStyles.title),
-                    ],
-                  ),
+                          Text(
+                            user?['name'] ?? '',
+                            style: AppTextStyles.heading1,
+                          ),
+
+                          Text(
+                            user?['phone'] ?? '',
+                            style: AppTextStyles.title,
+                          ),
+                        ],
+                      ),
+                    );
+                  },
                 ),
+
+                const SizedBox(height: 20),
+
                 CustomProfileItem(
                   image: 'assets/images/profile_icon.png',
                   title: 'My Profile',
                   onTap: openMyProfile,
                 ),
+
                 CustomProfileItem(
                   image: 'assets/images/location_icon.png',
                   title: 'Address Book',
@@ -101,27 +126,34 @@ class _ProfileViewState extends State<ProfileView> {
                     );
                   },
                 ),
+
                 CustomProfileItem(
                   image: 'assets/images/payment_icon.png',
                   title: 'Payment Methods',
                 ),
+
                 CustomProfileItem(
                   image: 'assets/images/my_orders_icon.png',
                   title: 'My Orders',
                 ),
+
                 CustomProfileItem(
                   image: 'assets/images/preferences_icon.png',
                   title: 'Preferences',
                 ),
+
                 CustomProfileItem(
                   image: 'assets/images/settings_icon.png',
                   title: 'Notification Settings',
                 ),
+
                 CustomProfileItem(
                   image: 'assets/images/help_icon.png',
                   title: 'Help & FAQ',
                 ),
-                SizedBox(height: 15),
+
+                const SizedBox(height: 15),
+
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
@@ -134,7 +166,7 @@ class _ProfileViewState extends State<ProfileView> {
 
                     TextButton(
                       onPressed: () {
-                        // Handle logout action
+                        context.read<ProfileCubit>().logout();
                       },
                       child: Text(
                         'Logout',
