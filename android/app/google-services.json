@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "840043414146",
+    "project_id": "quickapp-a8cce",
+    "storage_bucket": "quickapp-a8cce.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:840043414146:android:e4520bc24f0b3adcf42a9b",
+        "android_client_info": {
+          "package_name": "com.tripora.tripora"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAnH8pFMVwbxkOHhgiyxv3YxwTGyldfnA0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
