@@ -2,7 +2,7 @@
 
 **A Flutter-based meal delivery application that allows users to explore recipes, discover trending dishes, manage their cart, and place food orders through a simple and user-friendly interface.**
 
-📱 Features
+# Features 📱
 
 Authentication
 
@@ -12,7 +12,8 @@ Forgot password functionality.
 
 Firebase Authentication integration.
 
-Home & Discovery
+
+**Home & Discovery**
 
 Browse available recipes.
 
@@ -20,13 +21,13 @@ Explore trending recipes.
 
 Search for dishes.
 
-Dish Details
+**Dish Details**
 
 View detailed food information.
 
 Explore individual dishes.
 
-Shopping Cart
+**Shopping Cart**
 
 Add items to the cart.
 
@@ -34,13 +35,13 @@ Manage cart items.
 
 Proceed to checkout.
 
-Checkout & Orders
+**Checkout & Orders**
 
 Checkout screen.
 
 Order confirmation screen.
 
-User Profile
+**User Profile**
 
 View and manage profile information.
 
@@ -48,11 +49,11 @@ Address book.
 
 Profile settings and preferences.
 
-Saved Recipes
+**Saved Recipes**
 
 Access saved dishes.
 
-🛠️ Technologies Used
+# Technologies Used 🛠️
 
 Flutter & Dart – Cross-platform application development.
 
