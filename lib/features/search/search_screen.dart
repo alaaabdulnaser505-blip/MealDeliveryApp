@@ -50,7 +50,7 @@ class _SearchScreenState extends State<SearchScreen> {
                     width: double.infinity,
                   ),
                   Container(
-                    color: AppColors.lightRed,
+                    color: AppColors.brightRed,
                     height: height * 0.221,
                     width: double.infinity,
                     child: Column(

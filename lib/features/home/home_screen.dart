@@ -43,10 +43,12 @@ class _HomeScreenState extends State<HomeScreen> {
                 width:double.infinity,
               ),
               Container(
-                  height:height*0.23,
+                  constraints: BoxConstraints(
+                    minHeight: height * 0.23,
+                  ),
                 width:double.infinity,
                 decoration: BoxDecoration(
-                  color:AppColors.lightRed,
+                  color:AppColors.brightRed,
                   borderRadius: BorderRadius.only(
                     bottomLeft: Radius.circular(30),
                     bottomRight: Radius.circular(30)
@@ -241,7 +243,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     padding: const EdgeInsets.all(8.0),
                     child: IconButton(
                       onPressed: (){
-                        //Go to Profile Page
+                        Navigator.pushReplacementNamed(context,  "/profile");
                       },
                       icon: Icon(Icons.person,size:30),
                     ),

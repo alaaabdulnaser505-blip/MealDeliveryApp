@@ -93,7 +93,7 @@ class _TrendingRecipesState extends State<TrendingRecipes> {
                     padding: const EdgeInsets.all(8.0),
                     child: IconButton(
                       onPressed: (){
-                        //Go to Profile Page
+                        Navigator.pushReplacementNamed(context,  "/profile");
                       },
                       icon: Icon(Icons.person,size:30),
                     ),

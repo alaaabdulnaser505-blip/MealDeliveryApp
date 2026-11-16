@@ -1,8 +1,11 @@
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tripora/core/datasource/firebase_datasource.dart';
-import 'package:tripora/core/routing/app_routes.dart';
+import 'package:tripora/features/profile/my_profile_screen.dart';
+import 'package:tripora/features/profile/profile_screen.dart';
+
 import 'core/theme/app_theme.dart';
 import 'features/home/cubit/home_cubit.dart';
 import 'features/home/home_screen.dart';
@@ -12,9 +15,11 @@ import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  FirebaseDataSource firebaseDataSource = FirebaseDataSource();
-  // await firebaseDataSource.addRecipes();
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
   runApp(const MealDeliveryApp());
 }
 
@@ -24,31 +29,35 @@ class MealDeliveryApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: AppTheme.lightTheme,
-        home: BlocProvider(
+      debugShowCheckedModeBanner: false,
+      theme: AppTheme.lightTheme,
+
+      home: BlocProvider(
+        create: (context) => HomeCubit()..getRecipes(),
+        child: HomeScreen(),
+      ),
+
+      routes: {
+        'home': (context) => BlocProvider(
           create: (context) => HomeCubit()..getRecipes(),
           child: HomeScreen(),
         ),
-        routes: {
-          "home": (context) =>
-              BlocProvider(
-                create: (context) =>
-                HomeCubit()
-                  ..getRecipes(),
-                child: HomeScreen(),
-              ),
-          "trending_recipes": (context) =>
-              BlocProvider(
-                  create: (context) =>
-                  HomeCubit()
-                    ..getRecipes(),
-                  child: TrendingRecipes(
-                      recipeList: FirebaseDataSource().meals)),
-          "search": (context) => SearchScreen(allRecipes: FirebaseDataSource().meals,)
-        }
-      // routerConfig: AppRouter.router,
+
+        'trending_recipes': (context) => BlocProvider(
+          create: (context) => HomeCubit()..getRecipes(),
+          child: TrendingRecipes(
+            recipeList: FirebaseDataSource().meals,
+          ),
+        ),
+
+        'search': (context) => SearchScreen(
+          allRecipes: FirebaseDataSource().meals,
+        ),
+
+        '/profile': (context) => const ProfileScreen(),
+
+        '/myprofile': (context) => const MyProfileScreen(),
+      },
     );
   }
 }
-
